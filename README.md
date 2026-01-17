@@ -26,6 +26,13 @@
 
 ## 🌐 公開URL
 
+### Cloudflare Pages
+- **本番サイト**: https://coen-e-sports.pages.dev/
+- **第3回 Apex Legends大会**: https://coen-e-sports.pages.dev/20260301_apexlegends/
+
+### GitHub リポジトリ
+- **ソースコード**: https://github.com/youty-ys/coen-esports-apex
+
 ### 現在実装済みページ
 - **第3回 Apex Legends大会**: `/20260301_apexlegends/index.html`
 
