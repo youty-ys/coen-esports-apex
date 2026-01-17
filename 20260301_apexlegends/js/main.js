@@ -75,6 +75,69 @@ document.addEventListener('DOMContentLoaded', function() {
     const countdownInterval = setInterval(updateCountdown, 1000);
     
     // ===================================
+    // エントリーボタンの自動無効化
+    // ===================================
+    
+    // エントリー締切日時: 2026年3月1日 11:30
+    const entryDeadline = new Date('2026-03-01T11:30:00').getTime();
+    
+    // エントリーURLを難読化（Base64エンコード + 分割）
+    const entryUrlParts = [
+        'aHR0cHM6Ly9mb3Jtcy5n', // https://forms.g
+        'bGUva2tiZTlvQTZKb3o4', // le/kkbe9oA6Joz8
+        'YU1QMzY='              // aMP36
+    ];
+    
+    function checkEntryDeadline() {
+        const now = new Date().getTime();
+        const entryButtons = document.querySelectorAll('.entry-btn');
+        
+        if (now >= entryDeadline) {
+            // 締切後: ボタンを無効化
+            entryButtons.forEach(button => {
+                button.style.pointerEvents = 'none';
+                button.style.opacity = '0.5';
+                button.style.cursor = 'not-allowed';
+                button.style.backgroundColor = '#666';
+                button.style.borderColor = '#666';
+                
+                // hrefを削除してURLを隠す
+                button.removeAttribute('href');
+                button.removeAttribute('target');
+                button.removeAttribute('data-entry-url');
+                
+                // クリックイベントを無効化
+                button.onclick = (e) => {
+                    e.preventDefault();
+                    return false;
+                };
+                
+                // テキストを変更
+                const span = button.querySelector('span');
+                if (span && span.textContent.includes('参加エントリー')) {
+                    span.textContent = 'エントリー受付終了';
+                }
+            });
+        } else {
+            // 締切前: 難読化されたURLを復号して設定
+            const decodedUrl = entryUrlParts.map(part => atob(part)).join('');
+            
+            entryButtons.forEach(button => {
+                if (!button.hasAttribute('href') || button.getAttribute('href') === '#') {
+                    button.setAttribute('href', decodedUrl);
+                    button.setAttribute('target', '_blank');
+                }
+            });
+        }
+    }
+    
+    // 初回チェック
+    checkEntryDeadline();
+    
+    // 30秒ごとに再チェック
+    setInterval(checkEntryDeadline, 30000);
+    
+    // ===================================
     // スムーススクロール
     // ===================================
     
