@@ -130,6 +130,8 @@
 - **主催（coen）**: https://party-co.jp/coen
 
 ### 過去大会アーカイブ
+- **第1回 OverWatch 2 Part1**: https://www.youtube.com/live/3W9AW6dbNjg
+- **第1回 OverWatch 2 Part2**: https://www.youtube.com/live/AHNG7e32DyY
 - **第2回 VALORANT前夜祭**: https://www.youtube.com/live/dy9QETSAmzw
 - **第2回 VALORANT本編**: https://www.youtube.com/live/dpZ4FQD-Uo8
 
