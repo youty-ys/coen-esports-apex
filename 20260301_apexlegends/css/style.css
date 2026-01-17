@@ -469,6 +469,173 @@ body {
 }
 
 /* ===================================
+   ライブ配信セクション
+   =================================== */
+
+.live-stream-section {
+    background: var(--apex-black);
+    padding: 80px 0;
+}
+
+.live-stream-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* プレイヤー部分 */
+.live-stream-player {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.live-stream-player .video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    background: #000;
+}
+
+.live-stream-player .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 配信情報 */
+.live-stream-info {
+    padding: 24px;
+    background: var(--card-bg);
+}
+
+.live-stream-info h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.live-stream-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-youtube {
+    background: #ff0000;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-youtube:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+}
+
+.btn-youtube svg {
+    width: 24px;
+    height: 24px;
+}
+
+.btn-entry {
+    background: var(--coen-red);
+    color: white;
+    border: 2px solid var(--coen-red);
+}
+
+.btn-entry:hover {
+    background: transparent;
+    color: var(--coen-red);
+}
+
+/* チャット部分 */
+.live-chat-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 600px;
+}
+
+.chat-header {
+    background: var(--dark-bg);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.chat-header svg {
+    opacity: 0.8;
+}
+
+.chat-iframe-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1024px) {
+    .live-stream-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .live-chat-container {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .live-stream-section {
+        padding: 60px 0;
+    }
+    
+    .live-stream-actions {
+        flex-direction: column;
+    }
+    
+    .btn-youtube,
+    .btn-entry {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .live-chat-container {
+        min-height: 500px;
+    }
+}
+
+/* ===================================
    イベント概要
    =================================== */
 
