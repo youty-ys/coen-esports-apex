@@ -3,377 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Title -->
-    <title>第3回 coen e-sports Apex Legends大会 | 2026年3月1日開催</title>
-    
-    <!-- Meta Description -->
-    <meta name="description" content="coen主催のe-sports大会第3回目！Apex Legends部門を2026年3月1日12:00～17:00にオンライン開催。最大20チームによる白熱のバトルロワイヤル。参加費無料、誰でも参加OK！実況解説付き配信あり。">
-    
-    <!-- Meta Keywords -->
-    <meta name="keywords" content="coen,e-sports,イースポーツ,Apex Legends,エーペックスレジェンズ,ゲーム大会,オンライン大会,バトルロワイヤル,ゲーミング,2026">
-    
-    <!-- OGP (Open Graph Protocol) -->
-    <meta property="og:title" content="第3回 coen e-sports Apex Legends大会 | 2026年3月1日開催">
-    <meta property="og:description" content="coen主催のe-sports大会第3回目！最大20チームによる白熱のApex Legendsバトル。2026年3月1日12:00～17:00開催。参加費無料、誰でも参加OK！">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://coen-e-sports.pages.dev/20260301_apexlegends/">
-    <meta property="og:image" content="https://coen-e-sports.pages.dev/20260301_apexlegends/images/ogp.jpg">
-    <meta property="og:site_name" content="coen e-sports">
-    <meta property="og:locale" content="ja_JP">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="第3回 coen e-sports Apex Legends大会 | 2026年3月1日開催">
-    <meta name="twitter:description" content="coen主催のe-sports大会第3回目！最大20チームによる白熱のApex Legendsバトル。2026年3月1日12:00～17:00開催。参加費無料、誰でも参加OK！">
-    <meta name="twitter:image" content="https://coen-e-sports.pages.dev/20260301_apexlegends/images/ogp.jpg">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="images/favicon.png">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://coen-e-sports.pages.dev/20260301_apexlegends/">
-    
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <title>coen e-sports</title>
+    <meta http-equiv="refresh" content="0; url=/20260301_apexlegends/">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .redirect-message {
+            text-align: center;
+        }
+        .redirect-message h1 {
+            font-size: 3rem;
+            color: #E60012;
+            margin-bottom: 20px;
+        }
+        .redirect-message p {
+            font-size: 1.2rem;
+            color: #B8B8B8;
+        }
+        .redirect-message a {
+            color: #E60012;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .redirect-message a:hover {
+            color: #FFD700;
+        }
+    </style>
 </head>
 <body>
-    <!-- ナビゲーションヘッダー -->
-    <nav class="navbar" id="navbar">
-        <div class="navbar-container">
-            <div class="navbar-brand">
-                <a href="#hero">
-                    <img src="images/coen-logo.png" alt="coen" class="navbar-logo">
-                    <span class="navbar-text">e-sports</span>
-                </a>
-            </div>
-            <button class="navbar-toggle" id="navbar-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="navbar-menu" id="navbar-menu">
-                <li><a href="#overview">概要</a></li>
-                <li><a href="#schedule">スケジュール</a></li>
-                <li><a href="#rules">ルール</a></li>
-                <li><a href="#discord">Discord</a></li>
-                <li><a href="#past-events">過去大会</a></li>
-                <li><a href="#team">運営</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- ヒーローセクション -->
-    <header class="hero" id="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <div class="logo-container">
-                <img src="images/coen-logo.png" alt="coen" class="coen-logo">
-            </div>
-            <h1 class="main-title">
-                <span class="title-line">第3回</span>
-                <span class="title-line title-large">coen e-sports</span>
-                <span class="title-line apex-title">APEX LEGENDS</span>
-            </h1>
-            
-            <!-- カウントダウンタイマー -->
-            <div class="countdown-container">
-                <div class="countdown-label">STARTS IN</div>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="days">00</div>
-                        <div class="countdown-unit">DAYS</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="hours">00</div>
-                        <div class="countdown-unit">HOURS</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="minutes">00</div>
-                        <div class="countdown-unit">MINUTES</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="seconds">00</div>
-                        <div class="countdown-unit">SECONDS</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-buttons">
-                <a href="https://forms.gle/kkbe9oA6Joz8aMP36" target="_blank" class="btn btn-primary">
-                    <span>参加エントリー</span>
-                </a>
-                <a href="https://www.youtube.com/live/SV-kG4EO4_A" target="_blank" class="btn btn-secondary">
-                    <span>配信を見る</span>
-                </a>
-            </div>
-        </div>
-        <div class="hero-overlay"></div>
-    </header>
-
-    <!-- イベント概要 -->
-    <section class="section event-overview" id="overview">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-en">EVENT OVERVIEW</span>
-                <span class="title-ja">イベント概要</span>
-            </h2>
-            <div class="overview-content">
-                <div class="overview-grid">
-                    <div class="overview-item">
-                        <div class="overview-icon">📅</div>
-                        <div class="overview-label">開催日時</div>
-                        <div class="overview-value">2026年3月1日<br>12:00 - 17:00</div>
-                    </div>
-                    <div class="overview-item">
-                        <div class="overview-icon">🌐</div>
-                        <div class="overview-label">開催形式</div>
-                        <div class="overview-value">オンライン</div>
-                    </div>
-                    <div class="overview-item">
-                        <div class="overview-icon">👥</div>
-                        <div class="overview-label">募集人数</div>
-                        <div class="overview-value">60名</div>
-                    </div>
-                    <div class="overview-item">
-                        <div class="overview-icon">💰</div>
-                        <div class="overview-label">参加費</div>
-                        <div class="overview-value">無料</div>
-                    </div>
-                    <div class="overview-item">
-                        <div class="overview-icon">🎮</div>
-                        <div class="overview-label">参加資格</div>
-                        <div class="overview-value">誰でも参加OK</div>
-                    </div>
-                    <div class="overview-item">
-                        <div class="overview-icon">📝</div>
-                        <div class="overview-label">エントリー期限</div>
-                        <div class="overview-value">2026年2月28日まで</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- スケジュール -->
-    <section class="section schedule-section" id="schedule">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-en">SCHEDULE</span>
-                <span class="title-ja">開催スケジュール</span>
-            </h2>
-            <div class="schedule-content">
-                <div class="schedule-date">2026年3月1日</div>
-                <div class="schedule-timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-time">11:30</div>
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h3>開場（配信開始）</h3>
-                            <p>YouTube Liveにて配信開始</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">12:00</div>
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h3>開会式</h3>
-                            <p>大会ルール説明・注意事項</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">12:45</div>
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h3>試合開始</h3>
-                            <p>全5試合のバトルロワイヤル開始</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 大会ルール -->
-    <section class="section rules-section" id="rules">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-en">TOURNAMENT RULES</span>
-                <span class="title-ja">大会ルール</span>
-            </h2>
-            <div class="rules-content">
-                <div class="rules-basic">
-                    <div class="rule-card">
-                        <h3>対戦形式</h3>
-                        <p>通常モード</p>
-                    </div>
-                    <div class="rule-card">
-                        <h3>試合数</h3>
-                        <p>5試合</p>
-                    </div>
-                    <div class="rule-card">
-                        <h3>使用マップ</h3>
-                        <p>ブロークンムーン、ストームポイント、オリンパス、ワールズエッジ、キングスキャニオン</p>
-                    </div>
-                </div>
-
-                <div class="points-system">
-                    <h3 class="subsection-title">ポイントシステム</h3>
-                    <p class="points-description">各試合は順位とキルに応じてポイントが付与されます</p>
-                    
-                    <div class="points-tables">
-                        <div class="points-table-wrapper">
-                            <h4>順位ポイント</h4>
-                            <table class="points-table">
-                                <thead>
-                                    <tr>
-                                        <th>順位</th>
-                                        <th>ポイント</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td>1位</td><td class="points-value">12</td></tr>
-                                    <tr><td>2位</td><td class="points-value">9</td></tr>
-                                    <tr><td>3位</td><td class="points-value">7</td></tr>
-                                    <tr><td>4位</td><td class="points-value">5</td></tr>
-                                    <tr><td>5位</td><td class="points-value">4</td></tr>
-                                    <tr><td>6位</td><td class="points-value">3</td></tr>
-                                    <tr><td>7位</td><td class="points-value">3</td></tr>
-                                    <tr><td>8位</td><td class="points-value">2</td></tr>
-                                    <tr><td>9位</td><td class="points-value">2</td></tr>
-                                    <tr><td>10位</td><td class="points-value">2</td></tr>
-                                    <tr><td>11位〜15位</td><td class="points-value">1</td></tr>
-                                    <tr><td>16位〜20位</td><td class="points-value">0</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="points-table-wrapper">
-                            <h4>キルポイント</h4>
-                            <div class="kill-points-box">
-                                <div class="kill-points-value">+1</div>
-                                <div class="kill-points-label">各キルにつき1ポイント</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Discord -->
-    <section class="section discord-section" id="discord">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-en">JOIN OUR DISCORD</span>
-                <span class="title-ja">Discordサーバーに参加</span>
-            </h2>
-            <div class="discord-content">
-                <div class="discord-card">
-                    <div class="discord-icon">
-                        <svg width="80" height="80" viewBox="0 0 127.14 96.36" fill="currentColor">
-                            <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-                        </svg>
-                    </div>
-                    <h3>コミュニティに参加しよう</h3>
-                    <p>大会の最新情報、参加者同士の交流、質問や相談など、Discordサーバーで盛り上がりましょう！</p>
-                    <a href="https://discord.gg/8TpkyFmrjU" target="_blank" class="btn btn-discord">
-                        <span>Discordに参加</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 過去大会 -->
-    <section class="section past-events-section" id="past-events">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-en">PAST EVENTS</span>
-                <span class="title-ja">過去大会の様子</span>
-            </h2>
-            <div class="past-events-content">
-                <div class="past-event-card">
-                    <div class="video-container">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/dy9QETSAmzw?si=J4oQNUAPB0eju7G_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <h3>【第2回 coen e-sports】VALORANT 前夜祭</h3>
-                </div>
-                <div class="past-event-card">
-                    <div class="video-container">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/dpZ4FQD-Uo8?si=VaZXE7z6r7wJm0qg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <h3>【第2回 coen e-sports大会】VALORANT</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 運営メンバー -->
-    <section class="section team-section" id="team">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-en">STAFF</span>
-                <span class="title-ja">運営メンバー</span>
-            </h2>
-            <div class="team-content">
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-name">櫻井大稀</div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-name">齋藤雄太</div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-name">伊藤宏</div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-name">森田陽介</div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-name">猪狩俊</div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-name">関口貴大</div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-name">米田恵太</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 主催 -->
-    <section class="section organizer-section" id="organizer">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-en">ORGANIZER</span>
-                <span class="title-ja">主催</span>
-            </h2>
-            <div class="organizer-content">
-                <a href="https://party-co.jp/coen" target="_blank" class="organizer-link">
-                    <img src="images/coen-logo.png" alt="coen" class="organizer-logo">
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- フッター -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2026 coen e-sports. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
+    <div class="redirect-message">
+        <h1>coen e-sports</h1>
+        <p>リダイレクト中...</p>
+        <p>自動的に移動しない場合は<a href="/20260301_apexlegends/">こちらをクリック</a></p>
+    </div>
+    <script>
+        // JavaScriptでも念のためリダイレクト
+        window.location.href = '/20260301_apexlegends/';
+    </script>
 </body>
 </html>
