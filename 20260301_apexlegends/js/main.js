@@ -138,6 +138,48 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(checkEntryDeadline, 30000);
     
     // ===================================
+    // Discord Widget API
+    // ===================================
+    
+    const DISCORD_SERVER_ID = '1425356056653074522';
+    const DISCORD_WIDGET_API = `https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`;
+    
+    async function updateDiscordWidget() {
+        try {
+            const response = await fetch(DISCORD_WIDGET_API);
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                // オンライン人数を更新
+                const onlineCount = data.presence_count || 0;
+                document.getElementById('online-count').textContent = onlineCount;
+                
+                // 総メンバー数を更新（Widget APIから取得可能な場合）
+                if (data.members && data.members.length) {
+                    // 表示されているメンバー数（実際の総数より少ない可能性あり）
+                    document.getElementById('total-count').textContent = data.members.length + '+';
+                }
+                
+                console.log('Discord Widget updated:', data);
+            } else {
+                console.log('Discord Widget is disabled. Please enable it in server settings.');
+                // Widgetが無効の場合、デフォルト値を表示
+                document.getElementById('online-count').textContent = '--';
+            }
+        } catch (error) {
+            console.error('Failed to fetch Discord Widget:', error);
+            document.getElementById('online-count').textContent = '--';
+        }
+    }
+    
+    // 初回ロード
+    updateDiscordWidget();
+    
+    // 5分ごとに更新
+    setInterval(updateDiscordWidget, 300000);
+    
+    // ===================================
     // スムーススクロール
     // ===================================
     

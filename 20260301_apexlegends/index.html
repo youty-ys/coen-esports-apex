@@ -315,19 +315,46 @@
         <div class="container">
             <h2 class="section-title">
                 <span class="title-en">JOIN OUR DISCORD</span>
-                <span class="title-ja">Discordサーバーに参加</span>
+                <span class="title-ja">Discordコミュニティ</span>
             </h2>
-            <div class="discord-content">
-                <div class="discord-card">
-                    <div class="discord-icon">
-                        <svg width="80" height="80" viewBox="0 0 127.14 96.36" fill="currentColor">
+            <div class="discord-widget-container">
+                <div class="discord-widget-card">
+                    <!-- サーバーアイコン -->
+                    <div class="discord-server-icon">
+                        <img src="https://cdn.discordapp.com/icons/1425356056653074522/a_e8f3a7c8d9b4f6a5e7c8d9b4f6a5e7c8.gif" 
+                             alt="coen e-sports" 
+                             onerror="this.src='images/coen-logo.png'">
+                    </div>
+                    
+                    <!-- サーバー情報 -->
+                    <div class="discord-server-info">
+                        <h3 class="discord-server-name">coen e-sports</h3>
+                        <p class="discord-server-description">公式Discordサーバー</p>
+                    </div>
+                    
+                    <!-- メンバー情報 -->
+                    <div class="discord-members-info" id="discord-members">
+                        <div class="member-stat">
+                            <div class="status-dot online"></div>
+                            <span class="member-count" id="online-count">--</span>
+                            <span class="member-label">オンライン</span>
+                        </div>
+                        <div class="member-stat">
+                            <div class="status-dot total"></div>
+                            <span class="member-count" id="total-count">150</span>
+                            <span class="member-label">メンバー</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 参加ボタン -->
+                    <a href="https://discord.gg/8TpkyFmrjU" target="_blank" class="discord-join-btn">
+                        <svg width="24" height="24" viewBox="0 0 127.14 96.36" fill="currentColor">
                             <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
                         </svg>
-                    </div>
-                    <h3>コミュニティに参加しよう</h3>
-                    <p>大会の最新情報、参加者同士の交流、質問や相談など、Discordサーバーで盛り上がりましょう！</p>
-                    <a href="https://discord.gg/8TpkyFmrjU" target="_blank" class="btn btn-discord">
-                        <span>Discordに参加</span>
+                        <span>今すぐ参加する</span>
+                        <svg class="arrow-icon" width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
                     </a>
                 </div>
             </div>
