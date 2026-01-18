@@ -142,33 +142,55 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===================================
     
     const DISCORD_SERVER_ID = '1425356056653074522';
+    const DISCORD_INVITE_CODE = '8TpkyFmrjU';
     const DISCORD_WIDGET_API = `https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`;
+    const DISCORD_INVITE_API = `https://discord.com/api/v10/invites/${DISCORD_INVITE_CODE}?with_counts=true`;
     
     async function updateDiscordWidget() {
         try {
-            const response = await fetch(DISCORD_WIDGET_API);
+            // 招待リンクAPIから総メンバー数とオンライン人数を取得（推奨）
+            const inviteResponse = await fetch(DISCORD_INVITE_API);
             
-            if (response.ok) {
-                const data = await response.json();
+            if (inviteResponse.ok) {
+                const inviteData = await inviteResponse.json();
                 
                 // オンライン人数を更新
-                const onlineCount = data.presence_count || 0;
+                const onlineCount = inviteData.approximate_presence_count || 0;
                 document.getElementById('online-count').textContent = onlineCount;
                 
-                // 総メンバー数を更新（Widget APIから取得可能な場合）
-                if (data.members && data.members.length) {
-                    // 表示されているメンバー数（実際の総数より少ない可能性あり）
-                    document.getElementById('total-count').textContent = data.members.length + '+';
-                }
+                // 総メンバー数を更新
+                const memberCount = inviteData.approximate_member_count || 0;
+                document.getElementById('total-count').textContent = memberCount;
                 
-                console.log('Discord Widget updated:', data);
+                console.log('Discord data updated:', {
+                    online: onlineCount,
+                    total: memberCount
+                });
+                
+                return; // 成功したら終了
+            }
+        } catch (error) {
+            console.log('Failed to fetch Discord Invite API:', error);
+        }
+        
+        // フォールバック: Widget APIを試す（Widgetが有効な場合のみ動作）
+        try {
+            const widgetResponse = await fetch(DISCORD_WIDGET_API);
+            
+            if (widgetResponse.ok) {
+                const widgetData = await widgetResponse.json();
+                
+                // オンライン人数を更新
+                const onlineCount = widgetData.presence_count || 0;
+                document.getElementById('online-count').textContent = onlineCount;
+                
+                console.log('Discord Widget updated (fallback):', widgetData);
             } else {
-                console.log('Discord Widget is disabled. Please enable it in server settings.');
-                // Widgetが無効の場合、デフォルト値を表示
+                console.log('Discord Widget is disabled.');
                 document.getElementById('online-count').textContent = '--';
             }
         } catch (error) {
-            console.error('Failed to fetch Discord Widget:', error);
+            console.error('Failed to fetch Discord data:', error);
             document.getElementById('online-count').textContent = '--';
         }
     }
