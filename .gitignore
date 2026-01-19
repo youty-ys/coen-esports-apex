@@ -1,40 +1,25 @@
 # Dependencies
 node_modules/
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# Wrangler
+.wrangler/
 
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Environment variables
+# Environment
 .env
-.env.local
-.env.production
+.dev.vars
 
-# Editor directories
-.vscode/
-.idea/
+# PM2
+.pm2/
+pids/
+logs/
+*.log
 
-# OS files
-.DS_Store
-Thumbs.db
-
-# Build output
-dist/
-build/
-
-# Temporary files
-*.tmp
-*.temp
+# Backup files
 *.backup
 *.bak
-
-# Archives
-*.zip
 *.tar.gz
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,12 @@
+{
+  "name": "coen-esports-apex",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx wrangler pages dev . --ip 0.0.0.0 --port 3000",
+    "deploy": "npx wrangler pages deploy . --project-name coen-e-sports"
+  },
+  "devDependencies": {
+    "wrangler": "^3.114.17"
+  }
+}

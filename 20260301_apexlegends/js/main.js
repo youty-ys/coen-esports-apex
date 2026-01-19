@@ -272,6 +272,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ===================================
+    // YouTube iframe 遅延読み込み
+    // ===================================
+    
+    // 広告ブロッカー対策: iframeを遅延読み込み
+    const lazyLoadYouTube = () => {
+        const iframes = document.querySelectorAll('iframe[data-src]');
+        
+        const iframeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const iframe = entry.target;
+                    const src = iframe.getAttribute('data-src');
+                    
+                    // srcを設定してiframeを読み込む
+                    iframe.setAttribute('src', src);
+                    iframe.removeAttribute('data-src');
+                    
+                    // エラーハンドリング
+                    iframe.onerror = () => {
+                        console.log('YouTube iframe blocked by ad blocker');
+                    };
+                    
+                    iframeObserver.unobserve(iframe);
+                }
+            });
+        }, { rootMargin: '50px' });
+        
+        iframes.forEach(iframe => iframeObserver.observe(iframe));
+    };
+    
+    // ページロード後に遅延読み込みを開始
+    lazyLoadYouTube();
+    
+    // ===================================
     // コンソールメッセージ
     // ===================================
     
