@@ -352,11 +352,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     const force = (150 - distance) / 150;
                     const angle = Math.atan2(dy, dx);
                     
-                    // 逆方向に移動
-                    avatar.vx -= Math.cos(angle) * force * 0.5;
-                    avatar.vy -= Math.sin(angle) * force * 0.5;
+                    // 逆方向に移動（より滑らかな力）
+                    avatar.vx -= Math.cos(angle) * force * 0.3;
+                    avatar.vy -= Math.sin(angle) * force * 0.3;
                 }
             }
+            
+            // ランダムな微動を追加（自然な揺らぎ）
+            avatar.vx += (Math.random() - 0.5) * 0.02;
+            avatar.vy += (Math.random() - 0.5) * 0.02;
             
             // アイコン同士の衝突判定
             floatingAvatars.forEach((otherAvatar, otherIndex) => {
@@ -370,12 +374,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const minDistance = 5;
                 
                 if (distance < minDistance && distance > 0) {
-                    // 衝突時の反発力
+                    // 衝突時の反発力（より柔らかく）
                     const force = (minDistance - distance) / minDistance;
                     const angle = Math.atan2(dy, dx);
                     
-                    // 反発
-                    const pushForce = force * 0.3;
+                    // 反発（力を弱める）
+                    const pushForce = force * 0.2;
                     avatar.vx += Math.cos(angle) * pushForce;
                     avatar.vy += Math.sin(angle) * pushForce;
                     otherAvatar.vx -= Math.cos(angle) * pushForce;
@@ -383,21 +387,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
-            // 速度の減衰（自然な動き）
-            avatar.vx *= 0.95;
-            avatar.vy *= 0.95;
+            // 速度の減衰（より緩やかに = ふわっと感）
+            avatar.vx *= 0.98;
+            avatar.vy *= 0.98;
+            
+            // 最小速度を設定（完全に止まらない）
+            const minSpeed = 0.01;
+            if (Math.abs(avatar.vx) < minSpeed && Math.abs(avatar.vy) < minSpeed) {
+                avatar.vx += (Math.random() - 0.5) * minSpeed * 2;
+                avatar.vy += (Math.random() - 0.5) * minSpeed * 2;
+            }
             
             // 位置を更新
             avatar.x += avatar.vx;
             avatar.y += avatar.vy;
             
-            // 画面端での反転
+            // 画面端での反転（柔らかく）
             if (avatar.x < 5 || avatar.x > 95) {
-                avatar.vx *= -0.8;
+                avatar.vx *= -0.6;
                 avatar.x = Math.max(5, Math.min(95, avatar.x));
             }
             if (avatar.y < 5 || avatar.y > 95) {
-                avatar.vy *= -0.8;
+                avatar.vy *= -0.6;
                 avatar.y = Math.max(5, Math.min(95, avatar.y));
             }
             

@@ -1424,7 +1424,7 @@ body {
     box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
     pointer-events: auto;
     cursor: pointer;
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     animation: float 8s ease-in-out infinite;
     will-change: transform;
     overflow: hidden;
