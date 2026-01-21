@@ -17,7 +17,7 @@
 - ✅ Discord統合
 
 ## 公開URL
-- **本番環境**: https://4e088bf3.coen-e-sports.pages.dev/
+- **本番環境**: https://9679a568.coen-e-sports.pages.dev/
 - **プロダクションURL**: https://coen-e-sports.pages.dev/
 - **トップページ**: https://coen-e-sports.pages.dev/（ルートディレクトリ）
 - **過去大会ページ**: https://coen-e-sports.pages.dev/past-events/
