@@ -350,3 +350,31 @@ body {
         margin-bottom: 60px;
     }
 }
+
+/* 外部リンクバッジ */
+.external-link-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(230, 0, 18, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.external-link-badge svg {
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.youtube-card:hover .external-link-badge {
+    opacity: 1;
+    transform: scale(1);
+}
