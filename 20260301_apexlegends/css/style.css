@@ -742,6 +742,21 @@ body {
     .live-chat-container {
         min-height: 500px;
     }
+    
+    /* パンくずリストのスタイル調整 */
+    .breadcrumb-container {
+        padding: 10px 0;
+    }
+    
+    .breadcrumb {
+        padding: 0 20px;
+        font-size: 0.8rem;
+    }
+    
+    /* ヒーローコンテンツの上部余白を追加 */
+    .hero-content {
+        padding-top: 80px;
+    }
 }
 
 /* ===================================
@@ -2132,6 +2147,15 @@ body {
         font-size: 16px;
         gap: 10px;
     }
+    
+    /* ヒーローコンテンツの上部余白を追加してパンくずリストと被らないように */
+    .hero-content {
+        padding-top: 100px;
+    }
+    
+    .logo-container {
+        margin-bottom: 20px;
+    }
 }
 
 /* ===================================
@@ -2200,6 +2224,20 @@ body {
     
     .section-title .title-ja {
         font-size: 14px;
+    }
+    
+    /* パンくずリスト（モバイル） */
+    .breadcrumb-container {
+        padding: 8px 0;
+    }
+    
+    .breadcrumb {
+        padding: 0 15px;
+        font-size: 0.75rem;
+    }
+    
+    body {
+        padding-top: 150px; /* 80px navbar + 70px hero logo space */
     }
 }
 /* ===================================
