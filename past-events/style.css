@@ -306,27 +306,6 @@ body {
     text-align: center;
 }
 
-.footer-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.footer-logo img {
-    height: 30px;
-    width: auto;
-    filter: brightness(0) invert(1);
-}
-
-.footer-logo span {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
 .footer-copyright {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.6);
