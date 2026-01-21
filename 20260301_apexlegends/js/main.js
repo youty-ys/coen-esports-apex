@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const rect = container.getBoundingClientRect();
         
-        floatingAvatars.forEach((avatar) => {
+        floatingAvatars.forEach((avatar, index) => {
             // マウスカーソルからの距離を計算
             if (isMouseInDiscordSection) {
                 const avatarRect = avatar.element.getBoundingClientRect();
@@ -357,6 +357,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     avatar.vy -= Math.sin(angle) * force * 0.5;
                 }
             }
+            
+            // アイコン同士の衝突判定
+            floatingAvatars.forEach((otherAvatar, otherIndex) => {
+                if (index === otherIndex) return;
+                
+                const dx = avatar.x - otherAvatar.x;
+                const dy = avatar.y - otherAvatar.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                // 衝突判定（5%の距離 = 約60px）
+                const minDistance = 5;
+                
+                if (distance < minDistance && distance > 0) {
+                    // 衝突時の反発力
+                    const force = (minDistance - distance) / minDistance;
+                    const angle = Math.atan2(dy, dx);
+                    
+                    // 反発
+                    const pushForce = force * 0.3;
+                    avatar.vx += Math.cos(angle) * pushForce;
+                    avatar.vy += Math.sin(angle) * pushForce;
+                    otherAvatar.vx -= Math.cos(angle) * pushForce;
+                    otherAvatar.vy -= Math.sin(angle) * pushForce;
+                }
+            });
             
             // 速度の減衰（自然な動き）
             avatar.vx *= 0.95;
