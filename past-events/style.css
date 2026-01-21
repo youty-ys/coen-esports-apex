@@ -1,10 +1,32 @@
-/* パンくずリスト */
+/* ===================================
+   トップページカラーテーマのオーバーライド
+   =================================== */
+
+:root {
+    --coen-red: #E60012;
+    --primary-white: #FFFFFF;
+    --dark-gray: #2A2A2A;
+    --light-gray: #F5F5F5;
+    --accent-red: #DA291C;
+    --text-primary: #2A2A2A;
+    --text-secondary: #666666;
+    --border-color: #E0E0E0;
+}
+
+body {
+    background-color: var(--primary-white);
+    color: var(--text-primary);
+    padding-top: 124px; /* 80px (navbar) + 44px (breadcrumb) */
+}
+
+/* パンくずリスト（白赤基調） */
 .breadcrumb-container {
     position: fixed;
     top: 80px;
     left: 0;
     width: 100%;
-    background: rgba(10, 10, 10, 0.95);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     z-index: 999;
     padding: 12px 0;
@@ -40,12 +62,285 @@
     font-weight: 700;
 }
 
-/* パンくずリスト分の余白を追加 */
-body {
-    padding-top: 124px; /* 80px (navbar) + 44px (breadcrumb) */
+/* ===================================
+   過去大会セクション（白赤基調対応）
+   =================================== */
+
+.past-events-section {
+    background: var(--primary-white);
+    padding: 100px 0;
 }
 
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.title-en {
+    display: block;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: var(--coen-red);
+    margin-bottom: 10px;
+}
+
+.title-ja {
+    display: block;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.2em;
+}
+
+/* トーナメントグループ */
+.tournament-group {
+    margin-bottom: 80px;
+}
+
+.tournament-group:last-child {
+    margin-bottom: 0;
+}
+
+/* トーナメントヘッダー（白赤基調） */
+.tournament-header {
+    background: linear-gradient(135deg, var(--light-gray), var(--primary-white));
+    border: 2px solid var(--border-color);
+    border-left: 6px solid var(--coen-red);
+    padding: 30px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.tournament-header:hover {
+    border-left-width: 8px;
+    box-shadow: 0 10px 30px rgba(230, 0, 18, 0.1);
+}
+
+.tournament-header.valorant-theme {
+    border-left-color: #FF4655;
+}
+
+.tournament-header.overwatch-theme {
+    border-left-color: #F99E1A;
+}
+
+.tournament-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--coen-red);
+    color: var(--primary-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 15px;
+}
+
+.tournament-header.valorant-theme .tournament-badge {
+    background: #FF4655;
+}
+
+.tournament-header.overwatch-theme .tournament-badge {
+    background: #F99E1A;
+}
+
+.tournament-game-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+}
+
+.tournament-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+}
+
+.meta-item svg {
+    flex-shrink: 0;
+}
+
+/* 過去イベントグリッド */
+.past-events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* YouTubeカード */
+.youtube-card {
+    background: var(--light-gray);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.youtube-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(230, 0, 18, 0.15);
+    border-color: var(--coen-red);
+}
+
+.youtube-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: var(--dark-gray);
+    overflow: hidden;
+}
+
+.youtube-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.youtube-card:hover .youtube-thumbnail img {
+    transform: scale(1.05);
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.youtube-card:hover .play-button {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.youtube-info {
+    padding: 20px;
+}
+
+.youtube-info h4 {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.youtube-channel {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* 動画埋め込みカード */
+.video-embed-card {
+    background: var(--light-gray);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.video-embed-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(230, 0, 18, 0.15);
+    border-color: var(--coen-red);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: var(--dark-gray);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-info {
+    padding: 20px;
+}
+
+.video-info h4 {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.video-channel {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* フッター（白赤基調） */
+.footer {
+    background: var(--dark-gray);
+    color: var(--primary-white);
+    padding: 60px 0;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.footer-logo img {
+    height: 30px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.footer-logo span {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.footer-copyright {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===================================
+   レスポンシブ対応
+   =================================== */
+
 @media (max-width: 768px) {
+    body {
+        padding-top: 118px;
+    }
+
     .breadcrumb-container {
         padding: 10px 0;
     }
@@ -54,8 +349,25 @@ body {
         padding: 0 20px;
         font-size: 0.75rem;
     }
-    
-    body {
-        padding-top: 118px; /* モバイル用 */
+
+    .past-events-section {
+        padding: 60px 0;
+    }
+
+    .tournament-header {
+        padding: 20px;
+    }
+
+    .tournament-meta {
+        gap: 15px;
+    }
+
+    .past-events-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .tournament-group {
+        margin-bottom: 60px;
     }
 }
