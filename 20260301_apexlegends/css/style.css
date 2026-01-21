@@ -743,16 +743,6 @@ body {
         min-height: 500px;
     }
     
-    /* パンくずリストのスタイル調整 */
-    .breadcrumb-container {
-        padding: 6px 0;
-    }
-    
-    .breadcrumb {
-        padding: 0 20px;
-        font-size: 0.8rem;
-    }
-    
     /* ヒーローコンテンツの上部余白を追加 */
     .hero-content {
         padding-top: 80px;
@@ -1827,34 +1817,18 @@ body {
    レスポンシブ対応
    =================================== */
 
-@media (max-width: 768px) {
-    body {
-        padding-top: 70px;
-    }
-    
-    .navbar-container {
-        height: 70px;
-        padding: 0 20px;
-    }
-    
-    .navbar-logo {
-        height: 18px;
-    }
-    
-    .navbar-text {
-        font-size: 1.1rem;
-    }
-    
+/* 1100px以下: メニューをハンバーガーに切り替え（レイアウト崩れ防止） */
+@media (max-width: 1100px) {
     .navbar-toggle {
         display: flex;
     }
     
     .navbar-menu {
         position: fixed;
-        top: 70px;
+        top: 80px;
         left: -100%;
         width: 100%;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 80px);
         background: rgba(10, 10, 10, 0.98);
         backdrop-filter: blur(10px);
         flex-direction: column;
@@ -1884,6 +1858,43 @@ body {
     
     .navbar-menu li a::after {
         display: none;
+    }
+}
+
+/* 768px以下: ヘッダーを小さくし、パンくずリストも連動 */
+@media (max-width: 768px) {
+    body {
+        padding-top: 105px; /* 70px navbar + 35px breadcrumb */
+    }
+    
+    .navbar-container {
+        height: 70px;
+        padding: 0 20px;
+    }
+    
+    .navbar-logo {
+        height: 18px;
+    }
+    
+    .navbar-text {
+        font-size: 1.1rem;
+    }
+    
+    /* パンくずリストの位置をヘッダー高さに合わせる */
+    .breadcrumb-container {
+        top: 70px;
+        padding: 6px 0;
+    }
+    
+    .breadcrumb {
+        padding: 0 20px;
+        font-size: 0.8rem;
+    }
+    
+    /* ハンバーガーメニューの位置調整 */
+    .navbar-menu {
+        top: 70px;
+        height: calc(100vh - 70px);
     }
     
     .title-large {
