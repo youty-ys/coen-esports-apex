@@ -771,6 +771,8 @@ body {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(230, 0, 18, 0.1));
     transition: width 0.3s ease;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .overview-item:hover {
@@ -786,6 +788,8 @@ body {
 .overview-icon {
     font-size: 2.5rem;
     margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
 }
 
 .overview-label {
@@ -793,6 +797,8 @@ body {
     color: var(--text-secondary);
     margin-bottom: 10px;
     letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
 }
 
 .overview-value {
@@ -801,6 +807,26 @@ body {
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.4;
+    position: relative;
+    z-index: 1;
+}
+
+/* ゲームタイトルリンク */
+.overview-value a,
+.overview-value .game-title-link {
+    color: var(--coen-red);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+}
+
+.overview-value a:hover,
+.overview-value .game-title-link:hover {
+    color: var(--accent-orange);
+    text-decoration: underline;
 }
 
 /* ===================================
@@ -1982,18 +2008,6 @@ body {
 /* ===================================
    ゲームタイトルリンク
    =================================== */
-
-.game-title-link {
-    color: var(--coen-red);
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-    pointer-events: auto;
-    cursor: pointer;
-}
-
-.game-title-link:hover {
-    opacity: 0.7;
-}
 
 /* ===================================
    参加エントリーCTAセクション
