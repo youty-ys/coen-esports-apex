@@ -1861,14 +1861,14 @@ body {
     }
 }
 
-/* 768px以下: ヘッダーを小さくし、パンくずリストも連動 */
+/* 768px以下: パンくずリストをヘッダー高さに合わせる */
 @media (max-width: 768px) {
     body {
-        padding-top: 105px; /* 70px navbar + 35px breadcrumb */
+        padding-top: 115px; /* 80px navbar + 35px breadcrumb */
     }
     
+    /* ナビバーのサイズは80pxのまま維持 */
     .navbar-container {
-        height: 70px;
         padding: 0 20px;
     }
     
@@ -1880,9 +1880,9 @@ body {
         font-size: 1.1rem;
     }
     
-    /* パンくずリストの位置をヘッダー高さに合わせる */
+    /* パンくずリストの位置はヘッダー高さに合わせる */
     .breadcrumb-container {
-        top: 70px;
+        top: 80px;
         padding: 6px 0;
     }
     
@@ -1893,8 +1893,8 @@ body {
     
     /* ハンバーガーメニューの位置調整 */
     .navbar-menu {
-        top: 70px;
-        height: calc(100vh - 70px);
+        top: 80px;
+        height: calc(100vh - 80px);
     }
     
     .title-large {

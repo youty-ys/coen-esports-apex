@@ -450,12 +450,15 @@ body {
 .event-card.past {
     cursor: pointer;
     border-color: var(--text-secondary);
+    border-width: 1px; /* 黒枠を細く */
+    opacity: 0.7; /* 全体を少し薄く */
 }
 
 .event-card.past:hover {
     border-color: var(--coen-red);
     transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(230, 0, 18, 0.1);
+    box-shadow: 0 5px 20px rgba(230, 0, 18, 0.05); /* 影を薄く */
+    opacity: 0.85; /* ホバー時は少し濃く */
 }
 
 .event-card.past::before {
