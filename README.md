@@ -160,7 +160,7 @@ git push origin main
 - **プラットフォーム**: Cloudflare Pages
 - **自動デプロイ**: GitHub連携（mainブランチ）
 - **最終デプロイ**: 2026年1月21日
-- **最新URL**: https://99cb5ce9.coen-e-sports.pages.dev/
+- **最新URL**: https://e3ca293a.coen-e-sports.pages.dev/
 
 ## ライセンス
 © 2026 coen e-sports. All rights reserved.
