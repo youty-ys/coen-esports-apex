@@ -1,0 +1,4 @@
+# Cloudflare Pages リダイレクト設定
+# ルートディレクトリから Apex Legends 特設ページへリダイレクト
+
+/  /20260301_apexlegends/  301
