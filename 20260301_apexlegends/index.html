@@ -129,6 +129,34 @@
                 <div class="live-stream-player">
                     <div class="video-container">
                         <iframe data-src="https://www.youtube.com/embed/SV-kG4EO4_A?rel=0&modestbranding=1&controls=1&showinfo=0&fs=1&iv_load_policy=3&disablekb=0&enablejsapi=0" title="YouTube Live Stream" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                        
+                        <!-- ライブ配信開始前オーバーレイ -->
+                        <div class="live-stream-overlay" id="liveStreamOverlay">
+                            <div class="overlay-content">
+                                <div class="overlay-icon">📺</div>
+                                <h3 class="overlay-title">ライブ配信開場まで</h3>
+                                <p class="overlay-message">2026年3月1日（土）11:30より配信開始<br>もうしばらくお待ちください</p>
+                                
+                                <div class="overlay-countdown">
+                                    <div class="overlay-countdown-item">
+                                        <span class="overlay-countdown-value" id="overlay-days">00</span>
+                                        <span class="overlay-countdown-label">日</span>
+                                    </div>
+                                    <div class="overlay-countdown-item">
+                                        <span class="overlay-countdown-value" id="overlay-hours">00</span>
+                                        <span class="overlay-countdown-label">時間</span>
+                                    </div>
+                                    <div class="overlay-countdown-item">
+                                        <span class="overlay-countdown-value" id="overlay-minutes">00</span>
+                                        <span class="overlay-countdown-label">分</span>
+                                    </div>
+                                    <div class="overlay-countdown-item">
+                                        <span class="overlay-countdown-value" id="overlay-seconds">00</span>
+                                        <span class="overlay-countdown-label">秒</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="live-stream-info">
                         <h3>第3回 coen e-sports Apex Legends 大会配信</h3>

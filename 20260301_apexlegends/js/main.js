@@ -75,6 +75,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const countdownInterval = setInterval(updateCountdown, 1000);
     
     // ===================================
+    // ライブ配信オーバーレイ カウントダウン
+    // ===================================
+    
+    const liveStartDate = new Date('2026-03-01T11:30:00').getTime();
+    const overlayElement = document.getElementById('liveStreamOverlay');
+    
+    function updateLiveOverlayCountdown() {
+        const now = new Date().getTime();
+        const distance = liveStartDate - now;
+    
+        if (distance < 0) {
+            // 配信開始時刻を過ぎたらオーバーレイを非表示
+            overlayElement.classList.add('hidden');
+            clearInterval(liveOverlayInterval);
+            console.log('✅ ライブ配信が開始されました！');
+            return;
+        }
+    
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+        document.getElementById('overlay-days').textContent = String(days).padStart(2, '0');
+        document.getElementById('overlay-hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('overlay-minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('overlay-seconds').textContent = String(seconds).padStart(2, '0');
+    }
+    
+    // 初回実行とインターバル設定
+    updateLiveOverlayCountdown();
+    const liveOverlayInterval = setInterval(updateLiveOverlayCountdown, 1000);
+    
+    // ===================================
     // エントリーボタンの自動無効化
     // ===================================
     
