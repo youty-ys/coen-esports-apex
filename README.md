@@ -18,7 +18,7 @@
 
 ## 公開URL
 - **本番環境**: https://coen-e-sports.pages.dev/
-- **トップページ**: https://coen-e-sports.pages.dev/top/
+- **トップページ**: https://coen-e-sports.pages.dev/（ルートディレクトリ）
 - **Apex Legends大会ページ**: https://coen-e-sports.pages.dev/20260301_apexlegends/
 - **GitHub**: https://github.com/youty-ys/coen-esports-apex
 
@@ -40,14 +40,11 @@
 ## プロジェクト構成
 ```
 webapp/
-├── index.html              # ルートリダイレクト
-├── _redirects              # Cloudflare Pages リダイレクト設定
-├── top/                    # トップページ
-│   ├── index.html          # メインページ
-│   ├── css/
-│   │   └── style.css       # 白赤基調のカスタムCSS
-│   └── js/
-│       └── main.js         # ナビゲーション・アニメーション
+├── index.html              # トップページ（ルート）
+├── css/
+│   └── style.css           # 白赤基調のカスタムCSS
+├── js/
+│   └── main.js             # ナビゲーション・アニメーション
 ├── 20260301_apexlegends/   # Apex Legends大会ページ
 │   ├── index.html          # イベントページ
 │   ├── css/
@@ -163,7 +160,7 @@ git push origin main
 - **プラットフォーム**: Cloudflare Pages
 - **自動デプロイ**: GitHub連携（mainブランチ）
 - **最終デプロイ**: 2026年1月21日
-- **最新URL**: https://5262877d.coen-e-sports.pages.dev/
+- **最新URL**: https://99cb5ce9.coen-e-sports.pages.dev/
 
 ## ライセンス
 © 2026 coen e-sports. All rights reserved.
