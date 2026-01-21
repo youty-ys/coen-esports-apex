@@ -265,16 +265,15 @@ document.addEventListener('DOMContentLoaded', function() {
         container.innerHTML = '';
         floatingAvatars = [];
         
-        // 最大10個のアイコンを表示
-        const displayMembers = members.slice(0, 10);
-        
-        displayMembers.forEach((member, index) => {
+        // 全メンバーを表示（制限なし）
+        members.forEach((member, index) => {
             const avatar = document.createElement('div');
             avatar.className = `floating-avatar ${member.status}`;
             
             const img = document.createElement('img');
             img.src = member.avatar_url;
-            img.alt = member.username;
+            // プライバシー保護：alt属性を汎用的な値に
+            img.alt = 'Discord Member';
             img.loading = 'lazy';
             
             avatar.appendChild(img);
@@ -286,21 +285,30 @@ document.addEventListener('DOMContentLoaded', function() {
             avatar.style.left = `${randomX}%`;
             avatar.style.top = `${randomY}%`;
             
-            // アイコンのデータを保存
+            // アイコンのデータを保存（ユーザー名は保存しない）
             const avatarData = {
                 element: avatar,
                 x: randomX,
                 y: randomY,
                 vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                username: member.username
+                vy: (Math.random() - 0.5) * 0.5
             };
             
             floatingAvatars.push(avatarData);
             container.appendChild(avatar);
             
-            // ホバー時にユーザー名を表示
-            avatar.title = member.username;
+            // プライバシー保護：ツールチップを削除（title属性を設定しない）
+            // プライバシー保護：右クリックメニューを無効化
+            avatar.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                return false;
+            });
+            
+            // プライバシー保護：ドラッグ開始を無効化
+            avatar.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+                return false;
+            });
         });
         
         // Discord セクションのマウスイベント
