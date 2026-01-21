@@ -1,0 +1,695 @@
+/* ===================================
+   カラーパレット（白赤基調）
+   - coenレッド: #E60012
+   - ベースホワイト: #FFFFFF
+   - ダークグレー: #2A2A2A
+   - ライトグレー: #F5F5F5
+   =================================== */
+
+:root {
+    --coen-red: #E60012;
+    --primary-white: #FFFFFF;
+    --dark-gray: #2A2A2A;
+    --light-gray: #F5F5F5;
+    --accent-red: #DA291C;
+    --text-primary: #2A2A2A;
+    --text-secondary: #666666;
+    --border-color: #E0E0E0;
+}
+
+/* リセット & 基本設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--primary-white);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===================================
+   ナビゲーションヘッダー
+   =================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 30px rgba(230, 0, 18, 0.1);
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.navbar-brand a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.navbar-logo {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.navbar-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand a:hover .navbar-logo {
+    transform: scale(1.05);
+}
+
+.navbar-brand a:hover .navbar-text {
+    color: var(--coen-red);
+    text-shadow: 0 0 20px rgba(230, 0, 18, 0.2);
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu li a {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    position: relative;
+    letter-spacing: 0.05em;
+}
+
+.navbar-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--coen-red), transparent);
+    transition: width 0.3s ease;
+}
+
+.navbar-menu li a:hover {
+    color: var(--coen-red);
+}
+
+.navbar-menu li a:hover::after {
+    width: 100%;
+}
+
+/* ハンバーガーメニュー（モバイル用） */
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.navbar-toggle span {
+    width: 25px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+/* ===================================
+   ヒーローセクション
+   =================================== */
+
+.hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary-white) 0%, var(--light-gray) 100%);
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(230, 0, 18, 0.03) 0%, 
+        rgba(255, 255, 255, 0.8) 50%, 
+        rgba(230, 0, 18, 0.03) 100%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.logo-container {
+    margin-bottom: 30px;
+    animation: fadeInDown 1s ease;
+}
+
+.coen-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(230, 0, 18, 0.1));
+}
+
+.main-title {
+    margin: 0 0 30px 0;
+}
+
+.title-line {
+    display: block;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.1em;
+    animation: fadeInUp 1s ease;
+}
+
+.title-large {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--coen-red), var(--accent-red));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 50px rgba(230, 0, 18, 0.2);
+    margin: 20px 0;
+}
+
+.subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-top: 20px;
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 30px auto 0;
+    line-height: 1.8;
+    animation: fadeIn 1.5s ease;
+}
+
+/* アニメーション */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ===================================
+   共通セクションスタイル
+   =================================== */
+
+.section {
+    padding: 100px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.title-en {
+    display: block;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: var(--coen-red);
+    margin-bottom: 10px;
+}
+
+.title-ja {
+    display: block;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.2em;
+}
+
+/* ===================================
+   イベント一覧セクション
+   =================================== */
+
+.events-section {
+    background: var(--light-gray);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.event-card {
+    position: relative;
+    background: var(--primary-white);
+    border: 2px solid var(--border-color);
+    border-radius: 0;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--coen-red), var(--accent-red));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.event-card.active {
+    cursor: pointer;
+}
+
+.event-card.active:hover {
+    border-color: var(--coen-red);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(230, 0, 18, 0.15);
+}
+
+.event-card.active:hover::before {
+    transform: scaleX(1);
+}
+
+.event-card.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.event-card.disabled:hover {
+    transform: none;
+    border-color: var(--border-color);
+}
+
+.event-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--coen-red);
+    color: var(--primary-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+}
+
+.event-badge.past {
+    background: var(--text-secondary);
+}
+
+.event-number {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+}
+
+.event-game {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+}
+
+.event-date {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--coen-red);
+    margin-bottom: 20px;
+}
+
+.event-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.event-time {
+    font-weight: 700;
+}
+
+.event-status {
+    font-weight: 400;
+}
+
+.event-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: var(--coen-red);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.event-card.active:hover .event-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================
+   運営メンバーセクション
+   =================================== */
+
+.team-section {
+    background: var(--primary-white);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.team-member {
+    background: var(--light-gray);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--coen-red);
+    padding: 30px 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    background: var(--primary-white);
+    border-left-width: 8px;
+    box-shadow: 0 10px 30px rgba(230, 0, 18, 0.1);
+    transform: translateY(-5px);
+}
+
+.member-name {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.member-role {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--coen-red);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===================================
+   主催セクション
+   =================================== */
+
+.organizer-section {
+    background: var(--light-gray);
+}
+
+.organizer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.organizer-logo {
+    flex-shrink: 0;
+}
+
+.organizer-logo img {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+.organizer-info {
+    flex: 1;
+}
+
+.organizer-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.organizer-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+}
+
+.organizer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 30px;
+    background: var(--coen-red);
+    color: var(--primary-white);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.organizer-link:hover {
+    background: var(--accent-red);
+    transform: translateX(5px);
+}
+
+/* ===================================
+   フッター
+   =================================== */
+
+.footer {
+    background: var(--dark-gray);
+    color: var(--primary-white);
+    padding: 60px 0;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.footer-logo img {
+    height: 30px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.footer-logo span {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.footer-copyright {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===================================
+   レスポンシブ対応
+   =================================== */
+
+@media (max-width: 768px) {
+    /* ナビゲーション */
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .navbar-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        gap: 0;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border-color);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .navbar-menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar-menu li a {
+        display: block;
+        padding: 15px 20px;
+    }
+
+    .navbar-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .navbar-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* ヒーロー */
+    .hero {
+        min-height: 70vh;
+    }
+
+    .coen-logo {
+        height: 40px;
+    }
+
+    /* セクション */
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+    }
+
+    /* イベントカード */
+    .events-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .event-card {
+        padding: 30px 20px;
+    }
+
+    /* 主催セクション */
+    .organizer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .organizer-logo img {
+        width: 120px;
+    }
+
+    .organizer-info {
+        text-align: center;
+    }
+}
