@@ -31,7 +31,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    padding-top: 124px; /* 80px (navbar) + 44px (breadcrumb) */
+    padding-top: 115px; /* 80px (navbar) + 35px (breadcrumb) */
 }
 
 .container {
@@ -745,7 +745,7 @@ body {
     
     /* パンくずリストのスタイル調整 */
     .breadcrumb-container {
-        padding: 10px 0;
+        padding: 6px 0;
     }
     
     .breadcrumb {
@@ -2228,7 +2228,7 @@ body {
     
     /* パンくずリスト（モバイル） */
     .breadcrumb-container {
-        padding: 8px 0;
+        padding: 6px 0;
     }
     
     .breadcrumb {
@@ -2250,9 +2250,11 @@ body {
     left: 0;
     width: 100%;
     background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
     z-index: 999;
-    padding: 12px 0;
+    padding: 6px 0;
 }
 
 .breadcrumb {
