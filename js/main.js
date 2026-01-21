@@ -83,8 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // アニメーション対象の要素
-    const animatedElements = document.querySelectorAll('.event-card, .team-member, .organizer-content');
+    // アニメーション対象の要素（主催セクションは除外）
+    const animatedElements = document.querySelectorAll('.event-card, .team-member');
     
     animatedElements.forEach((el, index) => {
         el.style.opacity = '0';

@@ -446,6 +446,56 @@ body {
     transform: translateX(0);
 }
 
+/* 過去大会カード */
+.event-card.past {
+    cursor: pointer;
+    border-color: var(--text-secondary);
+}
+
+.event-card.past:hover {
+    border-color: var(--coen-red);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(230, 0, 18, 0.1);
+}
+
+.event-card.past::before {
+    background: linear-gradient(90deg, var(--text-secondary), var(--coen-red));
+}
+
+.event-card.past:hover::before {
+    transform: scaleX(1);
+}
+
+.event-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.event-card.past:hover .event-link {
+    border-color: var(--coen-red);
+    color: var(--coen-red);
+    background: rgba(230, 0, 18, 0.05);
+}
+
+.event-link svg {
+    transition: transform 0.3s ease;
+}
+
+.event-card.past:hover .event-link svg {
+    transform: translateX(5px);
+}
+
+
 /* ===================================
    運営メンバーセクション
    =================================== */
