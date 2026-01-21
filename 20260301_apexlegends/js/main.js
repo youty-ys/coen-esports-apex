@@ -180,35 +180,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const DISCORD_WIDGET_API = `https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`;
     const DISCORD_INVITE_API = `https://discord.com/api/v10/invites/${DISCORD_INVITE_CODE}?with_counts=true`;
     
+    // 浮遊アイコンの管理
+    let floatingAvatars = [];
+    let mouseX = 0;
+    let mouseY = 0;
+    let isMouseInDiscordSection = false;
+    
+    // マウス座標の追跡
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
     async function updateDiscordWidget() {
         try {
-            // 招待リンクAPIから総メンバー数とオンライン人数を取得（推奨）
-            const inviteResponse = await fetch(DISCORD_INVITE_API);
-            
-            if (inviteResponse.ok) {
-                const inviteData = await inviteResponse.json();
-                
-                // オンライン人数を更新
-                const onlineCount = inviteData.approximate_presence_count || 0;
-                document.getElementById('online-count').textContent = onlineCount;
-                
-                // 総メンバー数を更新
-                const memberCount = inviteData.approximate_member_count || 0;
-                document.getElementById('total-count').textContent = memberCount;
-                
-                console.log('Discord data updated:', {
-                    online: onlineCount,
-                    total: memberCount
-                });
-                
-                return; // 成功したら終了
-            }
-        } catch (error) {
-            console.log('Failed to fetch Discord Invite API:', error);
-        }
-        
-        // フォールバック: Widget APIを試す（Widgetが有効な場合のみ動作）
-        try {
+            // Widget APIからメンバー情報を取得
             const widgetResponse = await fetch(DISCORD_WIDGET_API);
             
             if (widgetResponse.ok) {
@@ -218,15 +204,176 @@ document.addEventListener('DOMContentLoaded', function() {
                 const onlineCount = widgetData.presence_count || 0;
                 document.getElementById('online-count').textContent = onlineCount;
                 
-                console.log('Discord Widget updated (fallback):', widgetData);
-            } else {
-                console.log('Discord Widget is disabled.');
-                document.getElementById('online-count').textContent = '--';
+                // 招待リンクAPIから総メンバー数を取得
+                try {
+                    const inviteResponse = await fetch(DISCORD_INVITE_API);
+                    if (inviteResponse.ok) {
+                        const inviteData = await inviteResponse.json();
+                        const memberCount = inviteData.approximate_member_count || 0;
+                        document.getElementById('total-count').textContent = memberCount;
+                    }
+                } catch (error) {
+                    console.log('Invite API fallback');
+                }
+                
+                // 浮遊アイコンを生成
+                if (widgetData.members && widgetData.members.length > 0) {
+                    createFloatingAvatars(widgetData.members);
+                }
+                
+                console.log('Discord data updated:', {
+                    online: onlineCount,
+                    members: widgetData.members?.length || 0
+                });
+                
+                return;
+            }
+        } catch (error) {
+            console.error('Failed to fetch Discord data:', error);
+        }
+        
+        // フォールバック: 招待リンクAPIのみ
+        try {
+            const inviteResponse = await fetch(DISCORD_INVITE_API);
+            
+            if (inviteResponse.ok) {
+                const inviteData = await inviteResponse.json();
+                
+                const onlineCount = inviteData.approximate_presence_count || 0;
+                document.getElementById('online-count').textContent = onlineCount;
+                
+                const memberCount = inviteData.approximate_member_count || 0;
+                document.getElementById('total-count').textContent = memberCount;
+                
+                console.log('Discord data updated (invite API):', {
+                    online: onlineCount,
+                    total: memberCount
+                });
             }
         } catch (error) {
             console.error('Failed to fetch Discord data:', error);
             document.getElementById('online-count').textContent = '--';
         }
+    }
+    
+    // 浮遊アイコン生成関数
+    function createFloatingAvatars(members) {
+        const container = document.getElementById('floatingAvatars');
+        if (!container) return;
+        
+        // 既存のアイコンをクリア
+        container.innerHTML = '';
+        floatingAvatars = [];
+        
+        // 最大10個のアイコンを表示
+        const displayMembers = members.slice(0, 10);
+        
+        displayMembers.forEach((member, index) => {
+            const avatar = document.createElement('div');
+            avatar.className = `floating-avatar ${member.status}`;
+            
+            const img = document.createElement('img');
+            img.src = member.avatar_url;
+            img.alt = member.username;
+            img.loading = 'lazy';
+            
+            avatar.appendChild(img);
+            
+            // ランダムな初期位置を設定（セクション全体に散らばる）
+            const randomX = Math.random() * 80 + 10; // 10% ~ 90%
+            const randomY = Math.random() * 80 + 10; // 10% ~ 90%
+            
+            avatar.style.left = `${randomX}%`;
+            avatar.style.top = `${randomY}%`;
+            
+            // アイコンのデータを保存
+            const avatarData = {
+                element: avatar,
+                x: randomX,
+                y: randomY,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                username: member.username
+            };
+            
+            floatingAvatars.push(avatarData);
+            container.appendChild(avatar);
+            
+            // ホバー時にユーザー名を表示
+            avatar.title = member.username;
+        });
+        
+        // Discord セクションのマウスイベント
+        const discordSection = document.getElementById('discord');
+        if (discordSection) {
+            discordSection.addEventListener('mouseenter', () => {
+                isMouseInDiscordSection = true;
+            });
+            
+            discordSection.addEventListener('mouseleave', () => {
+                isMouseInDiscordSection = false;
+            });
+        }
+        
+        // アニメーションループを開始
+        animateFloatingAvatars();
+    }
+    
+    // アイコンの動きを制御
+    function animateFloatingAvatars() {
+        if (floatingAvatars.length === 0) return;
+        
+        const container = document.getElementById('floatingAvatars');
+        if (!container) return;
+        
+        const rect = container.getBoundingClientRect();
+        
+        floatingAvatars.forEach((avatar) => {
+            // マウスカーソルからの距離を計算
+            if (isMouseInDiscordSection) {
+                const avatarRect = avatar.element.getBoundingClientRect();
+                const avatarCenterX = avatarRect.left + avatarRect.width / 2;
+                const avatarCenterY = avatarRect.top + avatarRect.height / 2;
+                
+                const dx = mouseX - avatarCenterX;
+                const dy = mouseY - avatarCenterY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                // カーソルが近づいたら逃げる（150px以内）
+                if (distance < 150) {
+                    const force = (150 - distance) / 150;
+                    const angle = Math.atan2(dy, dx);
+                    
+                    // 逆方向に移動
+                    avatar.vx -= Math.cos(angle) * force * 0.5;
+                    avatar.vy -= Math.sin(angle) * force * 0.5;
+                }
+            }
+            
+            // 速度の減衰（自然な動き）
+            avatar.vx *= 0.95;
+            avatar.vy *= 0.95;
+            
+            // 位置を更新
+            avatar.x += avatar.vx;
+            avatar.y += avatar.vy;
+            
+            // 画面端での反転
+            if (avatar.x < 5 || avatar.x > 95) {
+                avatar.vx *= -0.8;
+                avatar.x = Math.max(5, Math.min(95, avatar.x));
+            }
+            if (avatar.y < 5 || avatar.y > 95) {
+                avatar.vy *= -0.8;
+                avatar.y = Math.max(5, Math.min(95, avatar.y));
+            }
+            
+            // 位置を適用
+            avatar.element.style.left = `${avatar.x}%`;
+            avatar.element.style.top = `${avatar.y}%`;
+        });
+        
+        requestAnimationFrame(animateFloatingAvatars);
     }
     
     // 初回ロード

@@ -1371,6 +1371,89 @@ body {
     50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
 }
 
+/* 浮遊メンバーアイコン */
+.floating-avatars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.floating-avatar {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(88, 101, 242, 0.4);
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+    pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    animation: float 8s ease-in-out infinite;
+    will-change: transform;
+    overflow: hidden;
+}
+
+.floating-avatar:hover {
+    transform: scale(1.3);
+    border-color: rgba(88, 101, 242, 1);
+    box-shadow: 0 8px 25px rgba(88, 101, 242, 0.6);
+    z-index: 100;
+}
+
+.floating-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ステータスインジケーター */
+.floating-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--card-bg);
+    background: #43b581;
+}
+
+.floating-avatar.idle::after {
+    background: #faa61a;
+}
+
+.floating-avatar.offline::after {
+    background: #747f8d;
+}
+
+/* フローティングアニメーション（各アイコンで異なる） */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.floating-avatar:nth-child(2) { animation-delay: -1s; animation-duration: 7s; }
+.floating-avatar:nth-child(3) { animation-delay: -2s; animation-duration: 9s; }
+.floating-avatar:nth-child(4) { animation-delay: -3s; animation-duration: 6s; }
+.floating-avatar:nth-child(5) { animation-delay: -4s; animation-duration: 8s; }
+.floating-avatar:nth-child(6) { animation-delay: -5s; animation-duration: 7.5s; }
+.floating-avatar:nth-child(7) { animation-delay: -1.5s; animation-duration: 8.5s; }
+.floating-avatar:nth-child(8) { animation-delay: -2.5s; animation-duration: 6.5s; }
+.floating-avatar:nth-child(9) { animation-delay: -3.5s; animation-duration: 9.5s; }
+.floating-avatar:nth-child(10) { animation-delay: -4.5s; animation-duration: 7s; }
+
 .discord-widget-container {
     max-width: 800px;
     margin: 0 auto;
