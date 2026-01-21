@@ -1,92 +1,169 @@
-# coen e-sports Apex Legends 大会サイト
+# coen e-sports 公式サイト
 
 ## プロジェクト概要
-- **プロジェクト名**: coen e-sports Apex Legends 大会
-- **目標**: 第3回 Apex Legends 大会の情報提供および参加者募集
-- **開催日**: 2026年3月1日 12:00-17:00
+- **プロジェクト名**: coen e-sports 公式サイト
+- **目標**: ファッションブランドcoen主催のe-sports大会情報を提供
+- **構成**: トップページ + 各イベントの特設ページ
 
 ## 主な機能
-- ✅ 大会概要とスケジュール表示
-- ✅ カウントダウンタイマー
-- ✅ YouTube配信埋め込み
-- ✅ 参加エントリーフォーム
-- ✅ Discordコミュニティ情報
-- ✅ 過去大会アーカイブ
-- ✅ レスポンシブデザイン
+- ✅ トップページ（白赤基調のデザイン）
+- ✅ イベント一覧セクション
+- ✅ 追従ナビゲーションヘッダー
+- ✅ 運営メンバー紹介
+- ✅ 主催企業情報
+- ✅ レスポンシブデザイン（PC・タブレット・モバイル対応）
+- ✅ 第3回 Apex Legends 大会特設ページ
+- ✅ ライブ配信埋め込み
+- ✅ Discord統合
 
 ## 公開URL
-- **本番環境**: https://coen-e-sports.pages.dev/20260301_apexlegends/
+- **本番環境**: https://coen-e-sports.pages.dev/
+- **トップページ**: https://coen-e-sports.pages.dev/top/
+- **Apex Legends大会ページ**: https://coen-e-sports.pages.dev/20260301_apexlegends/
 - **GitHub**: https://github.com/youty-ys/coen-esports-apex
 
 ## データ構造
 - **ストレージ**: 静的HTML（Cloudflare Pages）
 - **データフロー**: 
   - Discord Widget API → メンバー数の自動更新
-  - YouTube Embed → ライブ配信・チャット・過去動画
-  - Google Forms → 参加エントリー
+  - YouTube Embed → ライブ配信・チャット
+  - 静的コンテンツ → Cloudflare CDN経由配信
 
 ## 技術スタック
 - **プラットフォーム**: Cloudflare Pages
-- **構成**: 純粋なHTML + CSS + JavaScript
-- **配信**: Wrangler Pages（静的サイトホスティング）
-- **最終更新**: 2026年1月19日
-
-## 使い方
-
-### 開発環境
-```bash
-# Wranglerで開発サーバー起動
-npx wrangler pages dev 20260301_apexlegends --ip 0.0.0.0 --port 3000
-```
-
-### デプロイ
-```bash
-# Cloudflare Pagesへデプロイ
-npx wrangler pages deploy 20260301_apexlegends --project-name coen-e-sports
-```
+- **フロントエンド**: HTML + CSS + JavaScript（バニラJS）
+- **デザイン**: カスタムCSS（白赤基調のブランドカラー）
+- **フォント**: Google Fonts（Noto Sans JP + Rajdhani）
+- **配信**: Cloudflare CDN
+- **最終更新**: 2026年1月21日
 
 ## プロジェクト構成
 ```
 webapp/
-├── 20260301_apexlegends/
+├── index.html              # ルートリダイレクト
+├── _redirects              # Cloudflare Pages リダイレクト設定
+├── top/                    # トップページ
 │   ├── index.html          # メインページ
 │   ├── css/
-│   │   └── style.css       # カスタムCSS
+│   │   └── style.css       # 白赤基調のカスタムCSS
+│   └── js/
+│       └── main.js         # ナビゲーション・アニメーション
+├── 20260301_apexlegends/   # Apex Legends大会ページ
+│   ├── index.html          # イベントページ
+│   ├── css/
+│   │   └── style.css       # 黒赤基調のカスタムCSS
 │   ├── js/
-│   │   └── main.js         # JavaScript機能
+│   │   └── main.js         # カウントダウン・Discord連携
 │   └── images/             # 画像アセット
 ├── .gitignore
 ├── package.json
+├── wrangler.toml
 └── README.md
 ```
 
+## 開発ガイド
+
+### 開発環境セットアップ
+```bash
+# 依存パッケージのインストール
+npm install
+
+# 開発サーバー起動（PM2）
+pm2 start ecosystem.config.cjs
+
+# ログ確認
+pm2 logs --nostream
+```
+
+### デプロイ
+```bash
+# ルートディレクトリ全体をデプロイ
+npx wrangler pages deploy . --project-name coen-e-sports
+
+# 特定のディレクトリをデプロイ（Apexページのみ）
+npx wrangler pages deploy 20260301_apexlegends --project-name coen-e-sports
+```
+
+### Gitワークフロー
+```bash
+# 変更をステージング
+git add .
+
+# コミット
+git commit -m "feat: Add new feature"
+
+# GitHubへプッシュ
+git push origin main
+```
+
 ## 完了した機能
-- ✅ レスポンシブヘッダーナビゲーション
+
+### トップページ
+- ✅ 白赤基調のブランドデザイン
+- ✅ 追従ナビゲーションヘッダー
 - ✅ ヒーローセクション（グラデーション背景）
+- ✅ イベント一覧セクション（第1回〜第3回）
+- ✅ 第3回Apex Legendsへのリンク（クリック可能）
+- ✅ 第1回・第2回は準備中表示（クリック不可）
+- ✅ 運営メンバーセクション
+- ✅ 主催企業セクション
+- ✅ フッター
+- ✅ スムーススクロール
+- ✅ フェードインアニメーション
+- ✅ レスポンシブ対応（モバイルメニュー）
+
+### Apex Legends大会ページ
+- ✅ 黒赤基調のゲーミングデザイン
+- ✅ レスポンシブヘッダーナビゲーション
+- ✅ ヒーローセクション（Apex風デザイン）
 - ✅ カウントダウンタイマー（2026-03-01 12:00:00まで）
-- ✅ エントリーボタン（期限管理・URL難読化）
+- ✅ ライブ配信オーバーレイ（開場前表示・自動消去）
 - ✅ YouTube Live配信埋め込み
 - ✅ YouTube Liveチャット埋め込み
-- ✅ イベント概要セクション
+- ✅ イベント概要セクション（Apex Legendsリンク付き）
 - ✅ スケジュール表示
-- ✅ 大会ルール詳細
-- ✅ Discord Widgetとメンバー数表示
+- ✅ 大会ルール詳細（ポイントシステム）
+- ✅ Discord Widget統合（メンバー数自動更新）
+- ✅ 浮遊Discordアイコン（物理演算・カーソル逃げ）
 - ✅ 過去大会アーカイブ
+- ✅ 参加エントリーCTAセクション
 - ✅ 運営チームメンバー紹介
-- ✅ フッター情報
-- ✅ YouTube iframe遅延読み込み対応
+- ✅ 主催企業情報
+- ✅ iPhone SE（375px）対応
+- ✅ YouTube iframe最適化（ログイベント削減）
 - ✅ エラーハンドリング実装
 
 ## 未実装機能
-（なし - すべての基本機能は実装済み）
+- 第1回・第2回イベントページ（準備中）
+- 過去大会の詳細ページ
+- エントリーフォームの実装（現在はURL準備中）
+
+## デザインコンセプト
+
+### トップページ（白赤基調）
+- **メインカラー**: coenレッド (#E60012) + ホワイト (#FFFFFF)
+- **コンセプト**: クリーン、モダン、ファッションブランドらしい洗練さ
+- **対象**: 一般ユーザー、初見の訪問者
+
+### Apex Legendsページ（黒赤基調）
+- **メインカラー**: coenレッド (#E60012) + Apexブラック (#0A0A0A)
+- **コンセプト**: ゲーミング、エネルギッシュ、競技性
+- **対象**: Apex Legendsプレイヤー、参加希望者
 
 ## 推奨される次のステップ
-1. SEO最適化（メタタグの強化）
-2. アクセス解析の導入（Google Analytics等）
-3. 多言語対応（英語版の追加）
-4. パフォーマンス最適化（画像の最適化等）
+1. 第1回・第2回イベントページの作成
+2. エントリーフォームの実装（Google Forms連携）
+3. SEO最適化（メタタグの強化）
+4. アクセス解析の導入（Google Analytics）
+5. Discord Bot統合（全メンバー表示）
+6. ソーシャルシェア機能の追加
 
 ## デプロイ状況
-- **ステータス**: ✅ デプロイ準備完了
-- **ビルド**: 不要（静的HTML）
-- **最終デプロイ**: 2026年1月19日（予定）
+- **ステータス**: ✅ Active
+- **プラットフォーム**: Cloudflare Pages
+- **自動デプロイ**: GitHub連携（mainブランチ）
+- **最終デプロイ**: 2026年1月21日
+- **最新URL**: https://5262877d.coen-e-sports.pages.dev/
+
+## ライセンス
+© 2026 coen e-sports. All rights reserved.
