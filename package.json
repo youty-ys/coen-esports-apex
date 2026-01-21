@@ -7,6 +7,7 @@
     "deploy": "npx wrangler pages deploy . --project-name coen-e-sports"
   },
   "devDependencies": {
+    "canvas": "^3.2.1",
     "wrangler": "^3.114.17"
   }
 }

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGP画像生成</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        canvas {
+            border: 2px solid #333;
+            display: block;
+            margin: 20px auto;
+            background: white;
+        }
+        .controls {
+            text-align: center;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #E60012;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #c00010;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <h1>coen e-sports OGP画像生成</h1>
+        <button onclick="generateOGP()">OGP画像を生成</button>
+        <button onclick="downloadOGP()">画像をダウンロード</button>
+    </div>
+    <canvas id="ogpCanvas" width="1200" height="630"></canvas>
+
+    <script>
+        const canvas = document.getElementById('ogpCanvas');
+        const ctx = canvas.getContext('2d');
+        let logoImg = null;
+
+        // ロゴ画像を読み込み
+        function loadLogo() {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => {
+                    logoImg = img;
+                    resolve();
+                };
+                img.onerror = reject;
+                img.src = '20260301_apexlegends/images/coen-logo.png';
+            });
+        }
+
+        // OGP画像を生成
+        async function generateOGP() {
+            // 背景（白とグラデーション）
+            const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+            gradient.addColorStop(0, '#FFFFFF');
+            gradient.addColorStop(1, '#FFF5F5');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1200, 630);
+
+            // 装飾的な赤いライン
+            ctx.strokeStyle = '#E60012';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(100, 150);
+            ctx.lineTo(1100, 150);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(100, 480);
+            ctx.lineTo(1100, 480);
+            ctx.stroke();
+
+            // ロゴが読み込まれていない場合は読み込む
+            if (!logoImg) {
+                await loadLogo();
+            }
+
+            // ロゴを描画（中央上部）
+            const logoWidth = 200;
+            const logoHeight = (logoImg.height / logoImg.width) * logoWidth;
+            const logoX = (1200 - logoWidth) / 2;
+            const logoY = 200;
+            ctx.drawImage(logoImg, logoX, logoY, logoWidth, logoHeight);
+
+            // E-SPORTSテキスト（Rajdahniフォント）
+            ctx.font = '900 120px Rajdhani';
+            ctx.fillStyle = '#E60012';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.letterSpacing = '8px';
+            
+            // テキストに影を追加
+            ctx.shadowColor = 'rgba(230, 0, 18, 0.2)';
+            ctx.shadowBlur = 20;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 10;
+            
+            ctx.fillText('E-SPORTS', 600, 380);
+
+            // 影をリセット
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+
+            // サブテキスト
+            ctx.font = '600 32px Rajdhani';
+            ctx.fillStyle = '#666666';
+            ctx.fillText('ゲームで繋がる、未来を創る', 600, 540);
+
+            console.log('OGP画像を生成しました');
+        }
+
+        // 画像をダウンロード
+        function downloadOGP() {
+            const link = document.createElement('a');
+            link.download = 'coen-esports-ogp.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // ページ読み込み時に自動生成
+        window.addEventListener('load', async () => {
+            await generateOGP();
+        });
+    </script>
+</body>
+</html>
