@@ -1,0 +1,344 @@
+/* ===================================
+   Discord Section Component
+   =================================== */
+
+.discord-section {
+    background: linear-gradient(135deg, #1a0a1a 0%, #0a0a1a 50%, #0a0a0a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.discord-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(88, 101, 242, 0.1) 0%, transparent 70%);
+    animation: discordPulse 3s ease-in-out infinite;
+}
+
+@keyframes discordPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+}
+
+/* 浮遊メンバーアイコン */
+.floating-avatars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.floating-avatar {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid rgba(88, 101, 242, 0.4);
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+    pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: float 8s ease-in-out infinite;
+    will-change: transform;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.floating-avatar:hover {
+    transform: scale(1.3);
+    border-color: rgba(88, 101, 242, 1);
+    box-shadow: 0 8px 25px rgba(88, 101, 242, 0.6);
+    z-index: 100;
+}
+
+.floating-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* ステータスインジケーター */
+.floating-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #0a0a0a;
+    background: #43b581;
+}
+
+.floating-avatar.idle::after {
+    background: #faa61a;
+}
+
+.floating-avatar.offline::after {
+    background: #747f8d;
+}
+
+/* フローティングアニメーション */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.floating-avatar:nth-child(2) { animation-delay: -1s; animation-duration: 7s; }
+.floating-avatar:nth-child(3) { animation-delay: -2s; animation-duration: 9s; }
+.floating-avatar:nth-child(4) { animation-delay: -3s; animation-duration: 6s; }
+.floating-avatar:nth-child(5) { animation-delay: -4s; animation-duration: 8s; }
+.floating-avatar:nth-child(6) { animation-delay: -5s; animation-duration: 7.5s; }
+.floating-avatar:nth-child(7) { animation-delay: -1.5s; animation-duration: 8.5s; }
+.floating-avatar:nth-child(8) { animation-delay: -2.5s; animation-duration: 6.5s; }
+
+.discord-widget-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Discord Widget Card */
+.discord-widget-card {
+    background: linear-gradient(135deg, rgba(88, 101, 242, 0.15) 0%, rgba(88, 101, 242, 0.05) 100%);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(88, 101, 242, 0.3);
+    border-radius: 16px;
+    padding: 60px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(88, 101, 242, 0.2);
+    transition: all 0.4s ease;
+}
+
+.discord-widget-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 80px rgba(88, 101, 242, 0.3);
+    border-color: rgba(88, 101, 242, 0.5);
+}
+
+/* サーバーアイコン */
+.discord-server-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #5865F2;
+    box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4);
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+.discord-server-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* サーバー情報 */
+.discord-server-info {
+    margin-bottom: 35px;
+}
+
+.discord-server-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.discord-server-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* メンバー情報 */
+.discord-members-info {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 40px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+}
+
+.member-stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.status-dot.online {
+    background: #3ba55d;
+    box-shadow: 0 0 12px #3ba55d;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.status-dot.total {
+    background: #747f8d;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.member-count {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.member-label {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* 参加ボタン */
+.discord-join-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 40px;
+    background: #5865F2;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(88, 101, 242, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.discord-join-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.discord-join-btn:hover::before {
+    left: 100%;
+}
+
+.discord-join-btn:hover {
+    background: #4752c4;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(88, 101, 242, 0.6);
+}
+
+.discord-join-btn svg:first-child {
+    width: 24px;
+    height: 24px;
+}
+
+.discord-join-btn .arrow-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.discord-join-btn:hover .arrow-icon {
+    transform: translateX(5px);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .discord-widget-card {
+        padding: 40px 30px;
+    }
+    
+    .discord-server-icon {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .discord-server-name {
+        font-size: 2rem;
+    }
+    
+    .discord-members-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .discord-join-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .discord-widget-card {
+        padding: 30px 20px;
+    }
+    
+    .discord-server-icon {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .discord-server-name {
+        font-size: 1.5rem;
+    }
+    
+    .discord-join-btn {
+        padding: 14px 20px;
+        font-size: 15px;
+        white-space: nowrap;
+    }
+}

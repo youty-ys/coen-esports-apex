@@ -43,6 +43,7 @@
     
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/discord-component.css">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,6 +68,7 @@
             <ul class="navbar-menu" id="navbar-menu">
                 <li><a href="#events">イベント</a></li>
                 <li><a href="/past-events/">過去大会</a></li>
+                <li><a href="#discord">Discord</a></li>
                 <li><a href="#team">運営</a></li>
                 <li><a href="#organizer">主催</a></li>
             </ul>
@@ -152,6 +154,9 @@
         </div>
     </section>
 
+    <!-- Discordセクション（コンポーネント） -->
+    <div id="discord-section-placeholder"></div>
+
     <!-- 運営メンバーセクション -->
     <section class="section team-section" id="team">
         <div class="container">
@@ -224,6 +229,15 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="js/discord-component.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Discordセクションを運営メンバーセクションの前に挿入
+        document.addEventListener('DOMContentLoaded', function() {
+            insertDiscordSection('#discord-section-placeholder', 'afterbegin', {
+                imagePath: 'images/discord-icon.png'
+            });
+        });
+    </script>
 </body>
 </html>
