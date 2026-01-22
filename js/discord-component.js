@@ -90,23 +90,229 @@ function insertDiscordSection(targetSelector, position = 'beforebegin', config =
 
 /**
  * Discordセクションの初期化
- * 浮遊アイコンのアニメーションなどを設定
+ * Discord API連携と浮遊アイコンのアニメーションを設定
  */
 function initializeDiscordSection() {
-    // 浮遊アイコンの生成（存在する場合）
-    const floatingContainer = document.getElementById('floatingAvatars');
-    if (floatingContainer && floatingContainer.children.length === 0) {
-        // 浮遊アイコンのダミーデータ
-        const avatarColors = ['#5865F2', '#57F287', '#FEE75C', '#EB459E', '#ED4245'];
+    // Discord API設定
+    const DISCORD_SERVER_ID = '1425356056653074522';
+    const DISCORD_INVITE_CODE = '8TpkyFmrjU';
+    const DISCORD_WIDGET_API = `https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`;
+    const DISCORD_INVITE_API = `https://discord.com/api/v10/invites/${DISCORD_INVITE_CODE}?with_counts=true`;
+    
+    let floatingAvatars = [];
+    let mouseX = 0;
+    let mouseY = 0;
+    let isMouseInDiscordSection = false;
+    
+    // マウス座標追跡
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    // Discordセクションへのマウス出入り検知
+    const discordSection = document.getElementById('discord');
+    if (discordSection) {
+        discordSection.addEventListener('mouseenter', () => {
+            isMouseInDiscordSection = true;
+        });
         
-        for (let i = 0; i < 8; i++) {
-            const avatar = document.createElement('div');
-            avatar.className = 'floating-avatar';
-            avatar.style.backgroundColor = avatarColors[i % avatarColors.length];
-            avatar.style.left = `${Math.random() * 80 + 10}%`;
-            avatar.style.animationDelay = `${Math.random() * 5}s`;
-            avatar.style.animationDuration = `${15 + Math.random() * 10}s`;
-            floatingContainer.appendChild(avatar);
+        discordSection.addEventListener('mouseleave', () => {
+            isMouseInDiscordSection = false;
+        });
+    }
+    
+    // Discord Widget更新関数
+    async function updateDiscordWidget() {
+        try {
+            const widgetResponse = await fetch(DISCORD_WIDGET_API);
+            
+            if (widgetResponse.ok) {
+                const widgetData = await widgetResponse.json();
+                
+                const onlineCount = widgetData.presence_count || 0;
+                const onlineElement = document.getElementById('online-count');
+                if (onlineElement) {
+                    onlineElement.textContent = onlineCount;
+                }
+                
+                try {
+                    const inviteResponse = await fetch(DISCORD_INVITE_API);
+                    if (inviteResponse.ok) {
+                        const inviteData = await inviteResponse.json();
+                        const memberCount = inviteData.approximate_member_count || 0;
+                        const totalElement = document.getElementById('total-count');
+                        if (totalElement) {
+                            totalElement.textContent = memberCount;
+                        }
+                    }
+                } catch (error) {
+                    console.log('Invite API fallback');
+                }
+                
+                if (widgetData.members && widgetData.members.length > 0) {
+                    createFloatingAvatars(widgetData.members);
+                }
+                
+                return;
+            }
+        } catch (error) {
+            console.error('Failed to fetch Discord data:', error);
+        }
+        
+        try {
+            const inviteResponse = await fetch(DISCORD_INVITE_API);
+            
+            if (inviteResponse.ok) {
+                const inviteData = await inviteResponse.json();
+                
+                const onlineCount = inviteData.approximate_presence_count || 0;
+                const onlineElement = document.getElementById('online-count');
+                if (onlineElement) {
+                    onlineElement.textContent = onlineCount;
+                }
+                
+                const memberCount = inviteData.approximate_member_count || 0;
+                const totalElement = document.getElementById('total-count');
+                if (totalElement) {
+                    totalElement.textContent = memberCount;
+                }
+            }
+        } catch (error) {
+            console.error('Failed to fetch Discord data:', error);
+            const onlineElement = document.getElementById('online-count');
+            if (onlineElement) {
+                onlineElement.textContent = '--';
+            }
         }
     }
+    
+    // 浮遊アバター生成
+    function createFloatingAvatars(members) {
+        const container = document.getElementById('floatingAvatars');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        floatingAvatars = [];
+        
+        members.forEach((member) => {
+            const avatar = document.createElement('div');
+            avatar.className = `floating-avatar ${member.status}`;
+            
+            const img = document.createElement('img');
+            img.src = member.avatar_url;
+            img.alt = 'Discord Member';
+            img.loading = 'lazy';
+            
+            avatar.appendChild(img);
+            
+            const randomX = Math.random() * 80 + 10;
+            const randomY = Math.random() * 80 + 10;
+            
+            avatar.style.left = `${randomX}%`;
+            avatar.style.top = `${randomY}%`;
+            
+            const avatarData = {
+                element: avatar,
+                x: randomX,
+                y: randomY,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5
+            };
+            
+            floatingAvatars.push(avatarData);
+            container.appendChild(avatar);
+            
+            avatar.addEventListener('contextmenu', (e) => e.preventDefault());
+            avatar.addEventListener('dragstart', (e) => e.preventDefault());
+        });
+        
+        animateFloatingAvatars();
+    }
+    
+    // アニメーション関数
+    function animateFloatingAvatars() {
+        if (floatingAvatars.length === 0) return;
+        
+        const container = document.getElementById('floatingAvatars');
+        if (!container) return;
+        
+        const rect = container.getBoundingClientRect();
+        
+        floatingAvatars.forEach((avatar, index) => {
+            if (isMouseInDiscordSection) {
+                const avatarRect = avatar.element.getBoundingClientRect();
+                const avatarCenterX = avatarRect.left + avatarRect.width / 2;
+                const avatarCenterY = avatarRect.top + avatarRect.height / 2;
+                
+                const dx = mouseX - avatarCenterX;
+                const dy = mouseY - avatarCenterY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 150) {
+                    const force = (150 - distance) / 150;
+                    const angle = Math.atan2(dy, dx);
+                    
+                    avatar.vx -= Math.cos(angle) * force * 0.3;
+                    avatar.vy -= Math.sin(angle) * force * 0.3;
+                }
+            }
+            
+            avatar.vx += (Math.random() - 0.5) * 0.02;
+            avatar.vy += (Math.random() - 0.5) * 0.02;
+            
+            floatingAvatars.forEach((otherAvatar, otherIndex) => {
+                if (index === otherIndex) return;
+                
+                const dx = avatar.x - otherAvatar.x;
+                const dy = avatar.y - otherAvatar.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                const minDistance = 5;
+                
+                if (distance < minDistance && distance > 0) {
+                    const force = (minDistance - distance) / minDistance;
+                    const angle = Math.atan2(dy, dx);
+                    
+                    const pushForce = force * 0.2;
+                    avatar.vx += Math.cos(angle) * pushForce;
+                    avatar.vy += Math.sin(angle) * pushForce;
+                    otherAvatar.vx -= Math.cos(angle) * pushForce;
+                    otherAvatar.vy -= Math.sin(angle) * pushForce;
+                }
+            });
+            
+            avatar.vx *= 0.98;
+            avatar.vy *= 0.98;
+            
+            const minSpeed = 0.01;
+            if (Math.abs(avatar.vx) < minSpeed && Math.abs(avatar.vy) < minSpeed) {
+                avatar.vx += (Math.random() - 0.5) * minSpeed * 2;
+                avatar.vy += (Math.random() - 0.5) * minSpeed * 2;
+            }
+            
+            avatar.x += avatar.vx;
+            avatar.y += avatar.vy;
+            
+            if (avatar.x < 5 || avatar.x > 95) {
+                avatar.vx *= -0.6;
+                avatar.x = Math.max(5, Math.min(95, avatar.x));
+            }
+            if (avatar.y < 5 || avatar.y > 95) {
+                avatar.vy *= -0.6;
+                avatar.y = Math.max(5, Math.min(95, avatar.y));
+            }
+            
+            avatar.element.style.left = `${avatar.x}%`;
+            avatar.element.style.top = `${avatar.y}%`;
+        });
+        
+        requestAnimationFrame(animateFloatingAvatars);
+    }
+    
+    // 初回更新
+    updateDiscordWidget();
+    
+    // 5分ごとに更新
+    setInterval(updateDiscordWidget, 300000);
 }
